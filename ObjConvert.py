@@ -29,10 +29,16 @@ def get_obj(path,scale,offset):
                 edge_table.append(e3)
             if l[0] == "f":
                 f3 = l.partition(" ")[2]
-                f3 = f3.split(" ",3)
-                f3[2] = f3[2].removesuffix("\n")
-                for s in range(3):
-                    f3[s] = int(f3[s])+offset-1
+                if f3.count(" ") == 2:
+                    f3 = f3.split(" ",3)
+                    f3[2] = f3[2].removesuffix("\n")
+                    for s in range(3):
+                        f3[s] = int(f3[s])+offset-1
+                elif f3.count(" ") == 3:
+                    f3 = f3.split(" ",4)
+                    f3[3] = f3[3].removesuffix("\n")
+                    for s in range(4):
+                        f3[s] = int(f3[s])+offset-1
                 face_table.append(f3)
 
     for f in range(len(face_table)):

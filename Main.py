@@ -23,12 +23,12 @@ running = True
 
 #Setup
 Engine.teapot([-100,0,200],100,"Assets/Jotaro.obj")
-Engine.teapot([0,200,0],100,"Assets/Cube.obj")
+Engine.teapot([0,200,0],100,"Assets/CubeQuad.obj")
 # pygame.mixer_music.load("awake.mp3")
 # pygame.mixer_music.play()
 
 for c in range(99):
-    Engine.teapot([random.randint(-10,10)*200,random.randint(0,10)*200,random.randint(-10,10)*200],100,"Assets/Cube.obj")
+    Engine.teapot([random.randint(-10,10)*200,random.randint(0,10)*200,random.randint(-10,10)*200],100,"Assets/CubeQuad.obj")
 
 #Update loop
 while running:

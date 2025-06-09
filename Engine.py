@@ -53,7 +53,10 @@ def label(str,size,color,pos):
 def render_faces():
     global culled
     for f in range(len(face_table)):
-        a,b,c = face_table[f]
+        if len(face_table[f]) == 3:
+            a,b,c = face_table[f]
+        else:
+            a,b,c,d = face_table[f]
         if camera[2] > vertex_table[a][2] or camera[2] > vertex_table[b][2] or camera[2] > vertex_table[c][2]:
             culled += 1
             continue
@@ -92,6 +95,20 @@ def render_faces():
         
         c_p = (x_p,y_p)
 
+        if len(face_table[f]) == 4:
+            x,y,z = vertex_table[d]
+            x_p = ((x-camera[0])*focal_length) / ((z-camera[2]))
+            y_p = ((y-camera[1])*focal_length) / ((z-camera[2]))
+            if abs(x_p) > screen.width and abs(y_p) > screen.height :
+                culled += 1
+                continue
+            x_p += width
+            y_p += height
+            d_p = (x_p,y_p)
+
+            pygame.draw.polygon(screen,faces_color[f],[a_p,b_p,c_p,d_p])
+            continue
+
         # z4 = min(min(z1,z2),z3)
         # color = max(min(int(z4/-5),255),0)
         # r,g,b = face_table[f]
@@ -106,9 +123,14 @@ def render_faces():
 def calculate_faces():
     depth_table.clear()
     for pf in range(len(face_table)):
-        a,b,c = face_table[pf]
-        #z = min(min(vertex_table[a][2],vertex_table[b][2]),vertex_table[c][2]) #Depth by furtherest
-        z = (vertex_table[a][2]+vertex_table[b][2]+vertex_table[c][2])/3.0 #Depth by average
+        if len(face_table[pf]) == 3:
+            a,b,c = face_table[pf]
+            z = (vertex_table[a][2]+vertex_table[b][2]+vertex_table[c][2])/3.0 #Depth by average
+            #z = min(min(vertex_table[a][2],vertex_table[b][2]),vertex_table[c][2]) #Depth by furtherest
+        elif len(face_table[pf]) == 4:
+            a,b,c,d = face_table[pf]
+            z = (vertex_table[a][2]+vertex_table[b][2]+vertex_table[c][2]+vertex_table[d][2])/4.0 #Depth by average
+
         depth_table.append(z)
     l1,l2,l3 = zip(*sorted(zip(depth_table, face_table, faces_color)))
     sorted_stuff = [l2,l3]
