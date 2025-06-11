@@ -1,5 +1,6 @@
 import pyperclip
 import random
+import math
 
 def get_obj(path,scale,offset):
     file = open(path)
@@ -41,10 +42,11 @@ def get_obj(path,scale,offset):
                         f3[s] = int(f3[s])+offset-1
                 face_table.append(f3)
 
-    for f in range(len(face_table)):
-        #c = str(hex(f)[2:])
-        #while len(c) != 6:
-            #c = c+"0"
+    for v in range(len(vertex_table)):
+        value = vertex_table[v][1]
+        c = str(hex(abs(int(value))))[2:]
+        while len(c) != 6:
+            c = c+"0"
         #faces_color.append("#"+c)
         faces_color.append((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
         #faces_color.append((0,0,0))

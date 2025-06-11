@@ -39,3 +39,15 @@ def render_edges():
         r,g,b = edge_color
         g = max(min(255,g-int(g*(z/100))),0)
         line(a_p,b_p,edge_width,edge_color)
+
+#Draw a circle(Useful for vertices in wireframe)
+def circle(x,y,radius,color):
+    pygame.draw.circle(screen,color,(x,y),radius)
+
+#Draw a line(Useful for edges in wireframe)
+def line(a,b,thickness,color):
+    pygame.draw.line(screen,color,a,b,thickness)
+
+#Draw a triangle(Useful for faces)
+def triangle(a,b,c,color):
+    pygame.draw.polygon(screen,color,[a,b,c])

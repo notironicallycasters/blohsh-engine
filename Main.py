@@ -4,35 +4,34 @@ import math
 import ObjConvert
 import Engine
 
-
 pygame.init()
 
 speed = 600
 sens = 0.5
 
-screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN) #Display the window
+screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN,display=0) #Display the window
 pygame.display.set_caption("Blohsh Engine") # Set title
 clock = pygame.time.Clock() #Pygame clock so time don't go brr
 delta = 0.1 #Delta ?
 
 height = screen.height/2
 width = screen.width/2
+print(screen.size)
 
 running = True
 
 
 #Setup
-Engine.teapot([-100,0,200],100,"Assets/Jotaro.obj")
-Engine.teapot([0,200,0],100,"Assets/CubeQuad.obj")
-# pygame.mixer_music.load("awake.mp3")
-# pygame.mixer_music.play()
+Engine.teapot([0,0,200],100,"Assets/Jotaro.obj")
 
-for c in range(99):
-    Engine.teapot([random.randint(-10,10)*200,random.randint(0,10)*200,random.randint(-10,10)*200],100,"Assets/CubeQuad.obj")
+for x in range(-8,8):
+    for y in range(-8,8):
+        Engine.teapot([x*200,random.randint(-8,8)*200,y*200],100,"Assets/CubeQuad.obj")
+
 
 #Update loop
 while running:
-    screen.fill((255,255,255)) #Clear the screen
+    screen.fill("#ffffff") #Clear the screen
     pygame.event.set_grab(True) #Grab the mouse
     pygame.mouse.set_visible(False) 
     pygame.mouse.set_pos(width/2,height/2)
@@ -74,13 +73,14 @@ while running:
 
     mouse = pygame.mouse.get_pos()
 
+    
     Engine.calculate_faces()
     Engine.render_faces()
-
     Engine.label("FPS: "+str(int(clock.get_fps())),50,(0,0,0),(0,0))
     Engine.label("Vertices: "+str(len(Engine.vertex_table)),50,(0,0,0),(0,30))
     Engine.label("Faces: "+str(len(Engine.face_table)),50,(0,0,0),(0,60))
     Engine.label("Culled: "+str(Engine.culled),50,(0,0,0),(0,90))
+    Engine.label("Objects: "+str(Engine.objects),50,(0,0,0),(0,120))
     Engine.culled = 0
 
     pygame.display.flip() # Render the screen
