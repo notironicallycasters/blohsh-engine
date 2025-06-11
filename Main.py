@@ -9,7 +9,8 @@ pygame.init()
 speed = 600
 sens = 0.5
 
-screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN,display=0) #Display the window
+screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN) #Display the window
+pygame.display.set_icon(pygame.image.load("icon.png")) #Set icon
 pygame.display.set_caption("Blohsh Engine") # Set title
 clock = pygame.time.Clock() #Pygame clock so time don't go brr
 delta = 0.1 #Delta ?

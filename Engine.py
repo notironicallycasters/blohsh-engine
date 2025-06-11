@@ -29,7 +29,7 @@ camera_rotation = [0,0,0] #Camera rotation
 focal_length = 600 #Focal length of the camera
 
 #Screen info
-screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN,display=0) #Display the window
+screen = pygame.display.set_mode((1920, 1080),pygame.FULLSCREEN) #Display the window
 height = screen.height/2
 width = screen.width/2
 
