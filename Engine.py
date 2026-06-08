@@ -56,50 +56,53 @@ def render_faces():
         x,y,z = vertex_table[a]
         z1 = z-camera[2]
         
-        x_p = ((x-camera[0])*focal_length) / ((z-camera[2]))
-        y_p = ((y-camera[1])*focal_length) / ((z-camera[2]))
+        x_p = ((x-camera[0])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        y_p = ((y-camera[1])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        x_p += width
+        y_p += height
         if abs(x_p) > screen.width and abs(y_p) > screen.height :
             culled += 1
             continue
-        x_p += width
-        y_p += height
+        
         a_p = (x_p,y_p)
 
         #Second vertex
         x,y,z = vertex_table[b]
         z2 = z-camera[2]
-        x_p = ((x-camera[0])*focal_length) / ((z-camera[2]))
-        y_p = ((y-camera[1])*focal_length) / ((z-camera[2]))
+        x_p = ((x-camera[0])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        y_p = ((y-camera[1])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        x_p += width
+        y_p += height
         if abs(x_p) > screen.width and abs(y_p) > screen.height :
             culled += 1
             continue
-        x_p += width
-        y_p += height
         b_p = (x_p,y_p)
 
         #Third vertex
         x,y,z = vertex_table[c]
         z3 = z-camera[2]
-        x_p = ((x-camera[0])*focal_length) / ((z-camera[2]))
-        y_p = ((y-camera[1])*focal_length) / ((z-camera[2]))
+        x_p = ((x-camera[0])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        y_p = ((y-camera[1])*focal_length) / ((z-camera[2])+0.000000000000000001)
+        x_p += width
+        y_p += height
         if abs(x_p) > screen.width and abs(y_p) > screen.height :
             culled += 1
             continue
-        x_p += width
-        y_p += height
+        
         
         c_p = (x_p,y_p)
 
         #Fourth vertex if face is quad
         if len(face_table[f]) == 4:
             x,y,z = vertex_table[d]
-            x_p = ((x-camera[0])*focal_length) / ((z-camera[2]))
-            y_p = ((y-camera[1])*focal_length) / ((z-camera[2]))
+            x_p = ((x-camera[0])*focal_length) / ((z-camera[2])+0.000000000000000001)
+            y_p = ((y-camera[1])*focal_length) / ((z-camera[2])+0.000000000000000001)
+            x_p += width
+            y_p += height
             if abs(x_p) > screen.width and abs(y_p) > screen.height :
                 culled += 1
                 continue
-            x_p += width
-            y_p += height
+            
             d_p = (x_p,y_p)
 
             pygame.draw.polygon(screen,faces_color[f],[a_p,b_p,c_p,d_p]) #Draw quad face
